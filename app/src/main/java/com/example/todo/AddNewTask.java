@@ -48,8 +48,10 @@ public class AddNewTask extends BottomSheetDialogFragment {
         super.onViewCreated(view, savedInstanceState);
 
         newTaskText = getView().findViewById(R.id.newTaskEdit);
+
         newTaskSaveButton = getView().findViewById(R.id.newTaskBtn);
         newTaskSaveButton.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.primary));
+        newTaskSaveButton.setEnabled(false);
 
         db = new DbHandler(getActivity());
         db.openDb();
