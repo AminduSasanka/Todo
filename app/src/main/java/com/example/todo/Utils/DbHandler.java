@@ -20,7 +20,7 @@ public class DbHandler extends SQLiteOpenHelper {
     private static final String CONTENT = "content";
     private static final String STATUS = "status";
     private static final String TABLE_CREATE_SQL = "CREATE TABLE " + TABLE + "("
-                                                    + ID + " INTEGER PRIMARY_KEY AUTOINCREMENT, "
+                                                    + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                                                     + CONTENT + " TEXT, "
                                                     + STATUS + " INTEGER)";
 
@@ -68,8 +68,8 @@ public class DbHandler extends SQLiteOpenHelper {
                     do{
                         TodoModel task = new TodoModel();
                         task.setId(cursor.getInt(cursor.getColumnIndex(ID)));
-                        task.setContent(String.valueOf(cursor.getColumnIndex(CONTENT)));
-                        task.setStatus(cursor.getColumnIndex(STATUS));
+                        task.setContent(cursor.getString(cursor.getColumnIndex(CONTENT)));
+                        task.setStatus(cursor.getInt(cursor.getColumnIndex(STATUS)));
                         taskList.add(task);
                     }
                     while (cursor.moveToNext());
@@ -90,7 +90,7 @@ public class DbHandler extends SQLiteOpenHelper {
     public void updateStatus(int id, int status){
         ContentValues cv = new ContentValues();
 
-        cv.put(STATUS, 0);
+        cv.put(STATUS, status);
         db.update(TABLE, cv, ID + "=?", new String[] { String.valueOf(id) });
     }
 
