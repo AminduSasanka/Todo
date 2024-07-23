@@ -1,5 +1,6 @@
 package com.example.todo;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -41,12 +42,14 @@ public class AddNewTask extends BottomSheetDialogFragment {
         return view;
     }
 
+    @SuppressLint("ResourceAsColor")
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
 
         newTaskText = getView().findViewById(R.id.newTaskEdit);
         newTaskSaveButton = getView().findViewById(R.id.newTaskBtn);
+        newTaskSaveButton.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.primary));
 
         db = new DbHandler(getActivity());
         db.openDb();
@@ -60,7 +63,7 @@ public class AddNewTask extends BottomSheetDialogFragment {
             newTaskText.setText(content);
 
             if(content.length() > 0){
-                newTaskSaveButton.setTextColor(ContextCompat.getColor(getContext(), R.color.black));
+                newTaskSaveButton.setTextColor(ContextCompat.getColor(getContext(), R.color.white));
             }
         }
 
