@@ -1,0 +1,75 @@
+# Ignore Android Studio specific files
+.idea
+.gradle
+/local.properties
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+
+# Ignore build output directories
+/build
+/app/build
+
+# Ignore Gradle specific files
+.gradle/
+/build/
+/gradle-app.setting
+/local.properties
+/.gradle
+/build/
+
+# Ignore JetBrains IDE settings
+.idea/*
+!*.iml
+!*.idea/workspace.xml
+!*.idea/modules.xml
+!*.idea/libraries
+.idea/navEditor.xml
+.idea/assetWizardSettings.xml
+
+# Ignore signing files
+signing.properties
+*.jks
+
+# Ignore other configurations
+.DS_Store
+/.externalNativeBuild
+.cxx
+/local.properties
+/gradle/wrapper/gradle-wrapper.properties
+
+# Ignore files for lint and other Android tools
+lint/fixtures/
+/lint/generated/
+/lint/tmp/
+*.orig
+
+# Ignore miscellaneous files
+*.log
+*.log.*
+*.log.?
+
+# Ignore keystore files
+*.keystore
+*.jks
+
+# Ignore generated files by Android Studio
+captures/
+output.json
+captures/
+
+# Ignore generated files by build system
+*.apk
+*.ap_
+
+# Ignore Google Services config file
+/google-services.json
+
+# Ignore MacOS system files
+.DS_Store
+
+# Ignore Windows system files
+Thumbs.db
