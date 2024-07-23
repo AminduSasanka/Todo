@@ -38,6 +38,11 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
         return todoList.size();
     }
 
+    public void setTasks(List<TodoModel> todoList){
+        this.todoList = todoList;
+        notifyDataSetChanged();
+    }
+
     private boolean convertToBool(int n){
         return n != 0;
     }
