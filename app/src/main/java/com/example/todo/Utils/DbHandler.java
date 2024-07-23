@@ -1,5 +1,6 @@
 package com.example.todo.Utils;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -25,7 +26,7 @@ public class DbHandler extends SQLiteOpenHelper {
 
     private SQLiteDatabase db;
 
-    private DbHandler(Context context){
+    public DbHandler(Context context){
         super(context, DATABASE, null, VERSION);
     }
 
@@ -52,6 +53,7 @@ public class DbHandler extends SQLiteOpenHelper {
         db.insert(TABLE, null, cv);
     }
 
+    @SuppressLint("Range")
     public List<TodoModel> getAllTasks(){
         List<TodoModel> taskList = new ArrayList<TodoModel>();
         Cursor cursor = null;
@@ -66,7 +68,7 @@ public class DbHandler extends SQLiteOpenHelper {
                     do{
                         TodoModel task = new TodoModel();
                         task.setId(cursor.getInt(cursor.getColumnIndex(ID)));
-                        task.setContent(cursor.getColumnIndex(CONTENT));
+                        task.setContent(String.valueOf(cursor.getColumnIndex(CONTENT)));
                         task.setStatus(cursor.getColumnIndex(STATUS));
                         taskList.add(task);
                     }
