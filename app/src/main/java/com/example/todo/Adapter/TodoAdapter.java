@@ -1,5 +1,6 @@
 package com.example.todo.Adapter;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +26,10 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
     public TodoAdapter(DbHandler db, MainActivity activity){
         this.db = db;
         this.activity = activity;
+    }
+
+    public Context getContext(){
+        return activity;
     }
 
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
@@ -84,5 +89,13 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder>{
         AddNewTask fragment = new AddNewTask();
         fragment.setArguments(bundle);
         fragment.show(activity.getSupportFragmentManager(), AddNewTask.TAG);
+    }
+
+    public void deleteItem(int position){
+        TodoModel item = todoList.get(position);
+        db.deleteTask(item.getId());
+
+        todoList.remove(position);
+        notifyItemRemoved(position);
     }
 }
