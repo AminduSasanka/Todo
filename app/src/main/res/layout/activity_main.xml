@@ -12,10 +12,11 @@
         android:id="@+id/tasksText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="30sp"
+        android:textSize="28sp"
         android:textStyle="bold"
         android:text="ToDo Tasks"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"/>
     
     <androidx.recyclerview.widget.RecyclerView

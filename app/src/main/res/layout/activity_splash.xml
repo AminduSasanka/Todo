@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/holo_purple">
+    
+    <ImageView
+        android:id="@+id/todoLogo"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/todo_logo"
+        android:layout_centerInParent="true"/>
+
+    <TextView
+        android:id="@+id/splashTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:text="ToDo"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/todoLogo"/>
+
+    <TextView
+        android:id="@+id/splashSubTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:text="Your task planner"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/splashTitle"/>
+
+
+</RelativeLayout>
