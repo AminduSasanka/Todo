@@ -91,6 +91,41 @@ public class DbHandler extends SQLiteOpenHelper {
         return taskList;
     }
 
+    @SuppressLint("Range")
+    public List<TodoModel> getAllTasksByPriority(){
+        List<TodoModel> taskList = new ArrayList<TodoModel>();
+        Cursor cursor = null;
+
+        db.beginTransaction();
+
+        try{
+            cursor = db.query(TABLE, null, null, null, null, null, PRIORITY + " DESC");
+
+            if(cursor != null){
+                if(cursor.moveToFirst()){
+                    do{
+                        TodoModel task = new TodoModel();
+                        task.setId(cursor.getInt(cursor.getColumnIndex(ID)));
+                        task.setContent(cursor.getString(cursor.getColumnIndex(CONTENT)));
+                        task.setStatus(cursor.getInt(cursor.getColumnIndex(STATUS)));
+                        task.setPriority(cursor.getInt(cursor.getColumnIndex(PRIORITY)));
+                        taskList.add(task);
+                    }
+                    while (cursor.moveToNext());
+                }
+            }
+        }
+        finally {
+            db.endTransaction();
+
+            if(cursor != null){
+                cursor.close();
+            }
+
+        }
+        return taskList;
+    }
+
     public void updateStatus(int id, int status){
         ContentValues cv = new ContentValues();
 
