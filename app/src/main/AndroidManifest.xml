@@ -24,6 +24,9 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"/>
+
+        <activity android:name=".HelpActivity"/>
+        <activity android:name=".AboutActivity"/>
     </application>
 
 </manifest>
