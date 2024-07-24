@@ -3,6 +3,7 @@ package com.example.todo.Model;
 public class TodoModel {
     private int id, status;
     private String content;
+    private int priority;
 
     public int getId() {
         return id;
@@ -27,4 +28,8 @@ public class TodoModel {
     public void setContent(String content) {
         this.content = content;
     }
+
+    public int getPriority() { return priority; }
+
+    public void setPriority(int priority) { this.priority = priority; }
 }

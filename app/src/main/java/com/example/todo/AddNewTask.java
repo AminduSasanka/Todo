@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import androidx.core.content.ContextCompat;
 
@@ -22,6 +24,8 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 public class AddNewTask extends BottomSheetDialogFragment {
     public static final String TAG = "ActionBottomDialog";
     public EditText newTaskText;
+    private RadioGroup priorityGroup;
+    private RadioButton priorityHigh, priorityLow;
     private Button newTaskSaveButton;
     private DbHandler db;
 
@@ -48,6 +52,9 @@ public class AddNewTask extends BottomSheetDialogFragment {
         super.onViewCreated(view, savedInstanceState);
 
         newTaskText = getView().findViewById(R.id.newTaskEdit);
+        priorityGroup = getView().findViewById(R.id.priorityGroup);
+        priorityHigh = getView().findViewById(R.id.priorityHigh);
+        priorityLow = getView().findViewById(R.id.priorityLow);
 
         newTaskSaveButton = getView().findViewById(R.id.newTaskBtn);
         newTaskSaveButton.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.primary));
@@ -62,7 +69,16 @@ public class AddNewTask extends BottomSheetDialogFragment {
         if(bundle != null){
             isUpdate = true;
             String content = bundle.getString("content");
+            int priority = bundle.getInt("priority");
             newTaskText.setText(content);
+            newTaskSaveButton.setEnabled(true);
+            newTaskSaveButton.setText("Update Task");
+
+            if (priority == 1) {
+                priorityHigh.setChecked(true);
+            } else {
+                priorityLow.setChecked(true);
+            }
 
             if(content.length() > 0){
                 newTaskSaveButton.setTextColor(ContextCompat.getColor(getContext(), R.color.white));
@@ -92,14 +108,16 @@ public class AddNewTask extends BottomSheetDialogFragment {
             @Override
             public void onClick(View v) {
                 String text = newTaskText.getText().toString();
+                int priority = priorityHigh.isChecked() ? 1 : 0;
 
                 if(finalIsUpdate){
-                    db.updateTask(bundle.getInt("id"), text);
+                    db.updateTask(bundle.getInt("id"), text, priority);
                 }
                 else{
                     TodoModel task = new TodoModel();
                     task.setStatus(0);
                     task.setContent(text);
+                    task.setPriority(priority);
                     db.createTask(task);
                 }
                 dismiss();

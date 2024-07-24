@@ -19,9 +19,11 @@ public class DbHandler extends SQLiteOpenHelper {
     private static final String ID = "id";
     private static final String CONTENT = "content";
     private static final String STATUS = "status";
+    private static final String PRIORITY = "priority";
     private static final String TABLE_CREATE_SQL = "CREATE TABLE " + TABLE + "("
                                                     + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                                                     + CONTENT + " TEXT, "
+                                                    + PRIORITY + " INTEGER, "
                                                     + STATUS + " INTEGER)";
 
     private SQLiteDatabase db;
@@ -37,7 +39,7 @@ public class DbHandler extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVresion, int newVersion){
-        db.execSQL("DROP TABLE IF EXISTS" + TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE);
         onCreate(db);
     }
 
@@ -50,6 +52,7 @@ public class DbHandler extends SQLiteOpenHelper {
 
         cv.put(CONTENT, task.getContent());
         cv.put(STATUS, 0);
+        cv.put(PRIORITY, task.getPriority());
         db.insert(TABLE, null, cv);
     }
 
@@ -70,6 +73,7 @@ public class DbHandler extends SQLiteOpenHelper {
                         task.setId(cursor.getInt(cursor.getColumnIndex(ID)));
                         task.setContent(cursor.getString(cursor.getColumnIndex(CONTENT)));
                         task.setStatus(cursor.getInt(cursor.getColumnIndex(STATUS)));
+                        task.setPriority(cursor.getInt(cursor.getColumnIndex(PRIORITY)));
                         taskList.add(task);
                     }
                     while (cursor.moveToNext());
@@ -94,10 +98,11 @@ public class DbHandler extends SQLiteOpenHelper {
         db.update(TABLE, cv, ID + "=?", new String[] { String.valueOf(id) });
     }
 
-    public void updateTask(int id, String content){
+    public void updateTask(int id, String content, int priority){
         ContentValues cv = new ContentValues();
 
         cv.put(CONTENT, content);
+        cv.put(PRIORITY, priority);
         db.update(TABLE, cv, ID + "=?", new String[] { String.valueOf(id) });
     }
 
