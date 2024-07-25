@@ -8,22 +8,30 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/tasksText"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_purple"
+        android:backgroundTint="@android:color/holo_purple"/>
+
+    <Button
+        android:id="@+id/sortButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="28sp"
-        android:textStyle="bold"
-        android:text="ToDo Tasks"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"/>
+        android:text="Sort by task priority"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/toolbar"
+        android:background="@android:color/transparent"
+        android:textColor="@android:color/holo_purple"
+        android:layout_marginRight="8dp"/>
     
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/taskRecyclerview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tasksText"
+        android:layout_below="@id/sortButton"
+        android:layout_marginTop="10dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:nestedScrollingEnabled="true"/>
 
