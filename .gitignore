@@ -39,7 +39,6 @@ signing.properties
 /.externalNativeBuild
 .cxx
 /local.properties
-/gradle/wrapper/gradle-wrapper.properties
 
 # Ignore files for lint and other Android tools
 lint/fixtures/
