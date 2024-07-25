@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,6 +34,8 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListne
     private List<TodoModel> taskList;
     private DbHandler db;
     private FloatingActionButton btn;
+    private Button sortButton;
+    private boolean sortedByPriority = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +60,26 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListne
             @Override
             public void onClick(View v) {
                 AddNewTask.newInstance().show(getSupportFragmentManager(), AddNewTask.TAG);
+            }
+        });
+
+        sortButton = findViewById(R.id.sortButton);
+        sortButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(sortedByPriority){
+                    sortedByPriority = false;
+                    taskList = db.getAllTasks();
+                    Collections.reverse(taskList);
+                    taskAdapter.setTasks(taskList);
+                    sortButton.setText("Sort by task priority");
+                }
+                else{
+                    sortedByPriority = true;
+                    taskList = db.getAllTasksByPriority();
+                    taskAdapter.setTasks(taskList);
+                    sortButton.setText("Sort by created order");
+                }
             }
         });
 
